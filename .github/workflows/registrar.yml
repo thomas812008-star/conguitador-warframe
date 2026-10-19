@@ -1,0 +1,26 @@
+
+name: Registrar Comandos Discord
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  registrar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Registrar comandos no Discord
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        run: python registrar_comandos.py
